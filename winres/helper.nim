@@ -1,5 +1,5 @@
 import std/[streams, strformat]
-import winres/[encoder, types]
+import ./encoder, ./types
 export FixedVersionInfo, FileFlag, FileKind
 
 template output*(filename: string; body: untyped) =
