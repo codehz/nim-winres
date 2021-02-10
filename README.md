@@ -22,7 +22,7 @@ output(fmt"target.res"):
     AnyCustomKey := "custom data"
     AnotherCustomKey := [1, 2, 3, 4]
 
-  RT_ANIFEST 1, 1033, """
+  RT_MANIFEST 1, 1033, """
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
   <application xmlns="urn:schemas-microsoft-com:asm.v3">
