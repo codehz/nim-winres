@@ -2,7 +2,7 @@
 
 version       = "0.1.0"
 author        = "CodeHz"
-description   = "Windows resource compiler"
+description   = "Windows resource generator"
 license       = "MIT"
 srcDir        = ""
 installExt    = @["nim"]
