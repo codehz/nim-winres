@@ -16,7 +16,7 @@ template injectKV*() =
   template `:=`(name: untyped; value: untyped) =
     enc.encodeKeyValue(astToStr name, value)
 
-template RT_VERSION*(id, langname, code: static uint16; fixed: FixedVersionInfo; strbody, varbody: untyped) =
+template RT_VERSION*(id, langname, code: uint16; fixed: FixedVersionInfo; strbody, varbody: untyped) =
   mixin encodeResource, encode, toUnicodeOrId, encodeVersionInfo, fixupValueLength, encodeBlock
   let resr {.gensym.} = enc.encodeResource(Resource(
     kind: toUnicodeOrId resVersion,
@@ -42,12 +42,18 @@ template RT_VERSION*(id, langname, code: static uint16; fixed: FixedVersionInfo;
   enc.fixupLength(vinf)
   enc.fixupLength(resr)
 
-template RT_MANIFEST*(id, langname: uint16; body: static string) =
-  mixin encodeResource, writeRaw, fixupLength, toUnicodeOrId
-  let resr {.gensym.} = enc.encodeResource(Resource(
-    kind: toUnicodeOrId resManifest,
-    name: toUnicodeOrId id,
-    lang: langname
-  ))
-  enc.writeRaw(body)
-  enc.fixupLength(resr)
+template RawValueTemplate(tmpname: untyped; resname: UnicodeOrId) =
+  template tmpname*(id, langname: uint16; body: string) =
+    mixin encodeResource, writeRaw, fixupLength, toUnicodeOrId
+    let resr {.gensym.} = enc.encodeResource(Resource(
+      kind: resname,
+      name: toUnicodeOrId id,
+      lang: langname
+    ))
+    enc.writeRaw(body)
+    enc.fixupLength(resr)
+
+RawValueTemplate(RT_MANIFEST, toUnicodeOrId resManifest)
+RawValueTemplate(RT_ICON, toUnicodeOrId resIcon)
+RawValueTemplate(RT_RCDATA, toUnicodeOrId resRawData)
+RawValueTemplate(RT_HTML, toUnicodeOrId resHTML)
