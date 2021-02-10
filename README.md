@@ -9,9 +9,11 @@ Example:
 import winres/[helper, version_code]
 
 let version = parseVersionCode("0.1.2.0")
+let icon = readIconData() # user provided
 
 output(fmt"target.res"):
-  RT_VERSION(1, 1033, 1200, FixedVersionInfo(file: version, product: version, kind: ftDll)) do:
+  RT_ICON(1, 1033, icon)
+  RT_VERSION(2, 1033, 1200, FixedVersionInfo(file: version, product: version, kind: ftDll)) do:
     # \StringFileInfo\XXXXXXXX\
     FileDescription := "awesome nim project"
     FileVersion := $version
@@ -22,7 +24,7 @@ output(fmt"target.res"):
     AnyCustomKey := "custom data"
     AnotherCustomKey := [1, 2, 3, 4]
 
-  RT_MANIFEST 1, 1033, """
+  RT_MANIFEST 3, 1033, """
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
   <application xmlns="urn:schemas-microsoft-com:asm.v3">
