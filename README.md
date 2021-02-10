@@ -34,4 +34,4 @@ output(fmt"target.res"):
   """
 ```
 
-Currently only support RT_VERSION and RT_ANIFEST
+Currently only support RT_VERSION, RT_ICON and RT_MANIFEST
