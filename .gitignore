@@ -1,0 +1,9 @@
+.vscode
+pkgs
+*.exe
+*.dll
+*.lib
+*.pdb
+*.manifest
+*.rc
+*.res
