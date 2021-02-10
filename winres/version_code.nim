@@ -27,13 +27,13 @@ func `$`*(self: VersionCode): string =
   &"{a}.{b}.{c}.{d}"
 
 func major*(self: VersionCode): uint16 =
-  uint16(uint16(self) shr 48 and 0xFFFF)
+  uint16(uint16(uint64(self) shr 48 and 0xFFFF))
 
 func minor*(self: VersionCode): uint16 =
-  uint16(uint16(self) shr 32 and 0xFFFF)
+  uint16(uint16(uint64(self) shr 32 and 0xFFFF))
 
 func revision*(self: VersionCode): uint16 =
-  uint16(uint16(self) shr 16 and 0xFFFF)
+  uint16(uint16(uint64(self) shr 16 and 0xFFFF))
 
 func build*(self: VersionCode): uint16 =
-  uint16(uint16(self) and 0xFFFF)
+  uint16(uint16(uint64(self) and 0xFFFF))
